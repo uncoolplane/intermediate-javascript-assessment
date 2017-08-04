@@ -44,9 +44,17 @@ function noWeakLink() {
     url: '/api/users'
   })
   // CODE HERE...
-
+  //not sure here on the 2nd then statement
+  .then(function (response) {
+    firstUser = response.data[0];
+    thirdUser = response.data[2];
+    // var d = new Promise();
+    // d.resolve(response);
+    // return d;
+    // resolve(response.data[9]);
+    // done();
+  })
 }
-
 
 
 // *************
@@ -75,7 +83,8 @@ function large() {
 }
 // CODE HERE...
 
-
+var boundToElephant = large.bind(elephant);
+// log(boundToElephant());
 
 // *************
 // * PROBLEM 3 *
@@ -88,7 +97,9 @@ function large() {
 // and return the bound function.
 
 // CODE HERE...
-
+var deathStar = function (capacity, crew) {
+  return capacity.bind(crew)
+}
 
 
 // *************
@@ -103,7 +114,11 @@ function large() {
 // The closure function will return the combined value of assets and liabilities.
 
 // CODE HERE...
-
+var accountingOffice = function (assests) {
+  return function (liabilities) {
+    return assests + liabilities;
+  }
+}
 
 
 // *************
@@ -128,7 +143,15 @@ function large() {
 // };
 
 // CODE HERE...
+var rememberall = function (item) {
+  var arr = [];
+  arr.push(item);
+  return {'name' : item, 'remember' : arr};
+}
 
+var forgetter = function (name) {
+  return rememberall;
+}
 
 
 // *************
@@ -156,3 +179,41 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+var frodo = function (startingHungerValue, startingDangerValue) {
+  var hunger = startingHungerValue;
+  var danger = startingDangerValue;
+
+  function update() {
+    if(hunger > 100 || hunger < 0) {
+
+      hunger += 25;
+    }
+
+    if(danger > 100 || danger < 0) {
+
+      danger += 40;
+    }
+  }
+
+  function save() {
+    if(hunger > 100 || hunger < 0) {
+      hunger += 35;
+    }
+    if(danger > 100 || danger < 0) {
+      danger += 20;
+    }
+  }
+
+  return {
+    hunger: hunger,
+    danger: danger,
+    dinnerOverFire : function () {
+      update();
+      return {hunger, danger}
+    },
+    hidingInBush: function () {
+      save();
+      return {hunger, danger}
+    }
+  }
+}
