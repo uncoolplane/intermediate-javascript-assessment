@@ -203,8 +203,18 @@ console.log(valueType(7, "Strawberry"));
 var theAnswer = "Unknown";
 
 // CODE HERE...
-promiseCatcher = function(p1) {
-  p1().then(function (result) {
-    theAnswer = result;
+// promiseCatcher = function(p1) {
+//   p1().then(function (result) {
+//     theAnswer = result;
+//   }).catch(function (e) {
+//     theAnswer = 'theAnswer';
+//   })
+// }
+
+promiseCatcher= function(p1) {
+    p1.then(function(value) {
+    theAnswer = value;
+  }).catch(function(e) {
+    theAnswer = e;
   })
 }
